@@ -1,0 +1,178 @@
+<html>
+
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="textwall.css">
+  <style>
+
+  </style>
+
+</head>
+
+<body>
+  <div id="wall"> </div>
+
+  <script>
+    // TODO make the wall size dynamic using these two variables
+    var window_width = $(window).width();
+    var window_height = $(window).height();
+
+    var words0 = ["shit", "fuck", "love", "cats", "dogs", "kiss", "mark", "foot", "hand", "damn", "cock", "home", "bath", "food", "milk", "meat", "meet", "hear", "here", "eyes", "nose", "neck", "head", "cold", "monk", "feet", "dear", "deer", "mice", "frog", "swan", "duck", "bird", "bits", "fold", "chip", "fish", "look", "lean", "ring", "rung", "rang", "lamb", "goat", "wart", "wood", "fire", "camp", "shoe", "boot", "lamp", "make", "made", "have", "ride", "meek", "blue", "pink", "read", "book", "back", "legs", "arms", "lung", "roof", "star", "wind", "rain", "snow", "fart", "hook", "isis", "iris", "hole", "mole", "clip", "bags", "pant", "rush", "bunk", "funk", "rank", "dank", "dark", "arts", "line", "dots", "plot", "rock","sham", "shiv", "stab", "scab", "hurt", "pain", "ages", "they", "them", "twat", "cunt", "leak", "spit", "rite", "duck", "bend", "snap", "bats", "fats", "curb", "carb", "like", "sect", "cult", "tent", "rent", "lent", "dent", "pent", "went", "goes", "moon", "moan", "mean", "shed", "sink", "sync", "jail", "rail", "nail", "mail", "pail", "sail", "zeal", "meal", "peel", "reel", "pear", "pair", "bail", "bond", "fail", "tail", "rear", "near", "sear", "suck", "lips", "tack", "rack", "gags", "hack", "jack", "lack", "pack", "sack", "wick", "yank", "fang", "sang", "lane", "deep", "peep", "seep", "dump", "sump", "lump", "pump", "rump", "ramp", "damp", "cart", "cars", "chai", "heap", "leap", "reap", "cape", "rape", "date", "time", "send", "sent", "rend", "mend", "fend", "well", "that", "leaf", "tree", "road", "node", "mode", "pond", "fond", "cask", "asks", "mask", "crag", "tire", "liar", "lyre", "free", "cost", "bill", "sill", "will", "mill", "pill", "word", "keys", "cars", "mare", "scar", "move", "yore", "lore", "bore", "boar", "sore", "soar", "hope", "fear", "ears", "tear", "tear", "read", "mead", "lead", "lead", "tore", "wore", "gore", "more", "fore", "door", "jamb", "walk", "weep", "four", "five", "nine", "tens", "quid", "bees", "knee", "bows", "rows", "does", "does", "fawn", "lawn", "yawn", "pawn", "dawn", "loan", "pack", "page", "lock", "down", "left", "seat", "beat", "weed", "acid", "coke", "come", "dome", "loam", "peat", "dirt", "rock", "bugs", "worm", "room", "soon", "fork", "bowl", "dust", "mist", "must", "rust", "hand", "land", "cans", "lust", "zest", "pest", "nest", "best", "rest", "verb", "noun", "ends", "feed", "need", "pole", "mete", "ball", "mall", "yard", "lard", "cows", "hens", "pens", "cups", "hats", "card", "tape", "late", "mate", "rate", "rods", "pods", "plum", "scum", "guns", "shun", "nuns", "plus", "take", "rake", "caps", "soft", "hard", "ease", "easy", "eggs", "sock", "leek", "reek", "lake", "seas", "sigh", "sign", "fare", "lair", "wear", "sure", "wink", "wonk", "talk", "seer", "beer", "wine", "dove", "crow", "soda", "peak", "weak", "seek"];
+
+    var words1 = ["shit", "fuck", "love", "cats", "dogs", "kiss", "mark", "foot", "hand", "damn", "cock", "home", "bath", "food", "milk", "meat", "meet", "hear", "here", "eyes", "nose", "neck", "head", "cold", "monk", "feet", "dear", "deer", "mice", "frog", "swan", "duck", "bird", "bits", "fold", "chip", "fish", "look", "lean", "ring", "rung", "rang", "lamb", "goat", "wart", "wood", "fire", "camp", "shoe", "boot", "lamp", "make", "made", "have", "ride", "meek", "blue", "pink", "read", "book", "back", "legs", "arms", "lung", "roof", "star", "wind", "rain", "snow", "fart", "hook", "isis", "iris", "hole", "mole", "clip", "bags", "pant", "rush", "bunk", "funk", "rank", "dank", "dark", "arts", "line", "dots", "plot", "rock","sham", "shiv", "stab", "scab", "hurt", "pain", "ages", "they", "them", "twat", "cunt", "leak", "spit", "rite", "duck", "bend", "snap", "bats", "fats", "curb", "carb", "like", "sect", "cult", "tent", "rent", "lent", "dent", "pent", "went", "goes", "moon", "moan", "mean", "shed", "sink", "sync", "jail", "rail", "nail", "mail", "pail", "sail", "zeal", "meal", "peel", "reel", "pear", "pair", "bail", "bond", "fail", "tail", "rear", "near", "sear", "suck", "lips", "tack", "rack", "gags", "hack", "jack", "lack", "pack", "sack", "wick", "yank", "fang", "sang", "lane", "deep", "peep", "seep", "dump", "sump", "lump", "pump", "rump", "ramp", "damp", "cart", "cars", "chai", "heap", "leap", "reap", "cape", "rape", "date", "time", "send", "sent", "rend", "mend", "fend", "well", "that", "leaf", "tree", "road", "node", "mode", "pond", "fond", "cask", "asks", "mask", "crag", "tire", "liar", "lyre", "free", "cost", "bill", "sill", "will", "mill", "pill", "word", "keys", "cars", "mare", "scar", "move", "yore", "lore", "bore", "boar", "sore", "soar", "hope", "fear", "ears", "tear", "tear", "read", "mead", "lead", "lead", "tore", "wore", "gore", "more", "fore", "door", "jamb", "walk", "weep", "four", "five", "nine", "tens", "quid", "bees", "knee", "bows", "rows", "does", "does", "fawn", "lawn", "yawn", "pawn", "dawn", "loan", "pack", "page", "lock", "down", "left", "seat", "beat", "weed", "acid", "coke", "come", "dome", "loam", "peat", "dirt", "rock", "bugs", "worm", "room", "soon", "fork", "bowl", "dust", "mist", "must", "rust", "hand", "land", "cans", "lust", "zest", "pest", "nest", "best", "rest", "verb", "noun", "ends", "feed", "need", "pole", "mete", "ball", "mall", "yard", "lard", "cows", "hens", "pens", "cups", "hats", "card", "tape", "late", "mate", "rate", "rods", "pods", "plum", "scum", "guns", "shun", "nuns", "plus", "take", "rake", "caps", "soft", "hard", "ease", "easy", "eggs", "sock", "leek", "reek", "lake", "seas", "sigh", "sign", "fare", "lair", "wear", "sure", "wink", "wonk", "talk", "seer", "beer", "wine", "dove", "crow", "soda", "peak", "weak", "seek"];
+
+    var words2 = ["shit", "fuck", "love", "cats", "dogs", "kiss", "mark", "foot", "hand", "damn", "cock", "home", "bath", "food", "milk", "meat", "meet", "hear", "here", "eyes", "nose", "neck", "head", "cold", "monk", "feet", "dear", "deer", "mice", "frog", "swan", "duck", "bird", "bits", "fold", "chip", "fish", "look", "lean", "ring", "rung", "rang", "lamb", "goat", "wart", "wood", "fire", "camp", "shoe", "boot", "lamp", "make", "made", "have", "ride", "meek", "blue", "pink", "read", "book", "back", "legs", "arms", "lung", "roof", "star", "wind", "rain", "snow", "fart", "hook", "isis", "iris", "hole", "mole", "clip", "bags", "pant", "rush", "bunk", "funk", "rank", "dank", "dark", "arts", "line", "dots", "plot", "rock","sham", "shiv", "stab", "scab", "hurt", "pain", "ages", "they", "them", "twat", "cunt", "leak", "spit", "rite", "duck", "bend", "snap", "bats", "fats", "curb", "carb", "like", "sect", "cult", "tent", "rent", "lent", "dent", "pent", "went", "goes", "moon", "moan", "mean", "shed", "sink", "sync", "jail", "rail", "nail", "mail", "pail", "sail", "zeal", "meal", "peel", "reel", "pear", "pair", "bail", "bond", "fail", "tail", "rear", "near", "sear", "suck", "lips", "tack", "rack", "gags", "hack", "jack", "lack", "pack", "sack", "wick", "yank", "fang", "sang", "lane", "deep", "peep", "seep", "dump", "sump", "lump", "pump", "rump", "ramp", "damp", "cart", "cars", "chai", "heap", "leap", "reap", "cape", "rape", "date", "time", "send", "sent", "rend", "mend", "fend", "well", "that", "leaf", "tree", "road", "node", "mode", "pond", "fond", "cask", "asks", "mask", "crag", "tire", "liar", "lyre", "free", "cost", "bill", "sill", "will", "mill", "pill", "word", "keys", "cars", "mare", "scar", "move", "yore", "lore", "bore", "boar", "sore", "soar", "hope", "fear", "ears", "tear", "tear", "read", "mead", "lead", "lead", "tore", "wore", "gore", "more", "fore", "door", "jamb", "walk", "weep", "four", "five", "nine", "tens", "quid", "bees", "knee", "bows", "rows", "does", "does", "fawn", "lawn", "yawn", "pawn", "dawn", "loan", "pack", "page", "lock", "down", "left", "seat", "beat", "weed", "acid", "coke", "come", "dome", "loam", "peat", "dirt", "rock", "bugs", "worm", "room", "soon", "fork", "bowl", "dust", "mist", "must", "rust", "hand", "land", "cans", "lust", "zest", "pest", "nest", "best", "rest", "verb", "noun", "ends", "feed", "need", "pole", "mete", "ball", "mall", "yard", "lard", "cows", "hens", "pens", "cups", "hats", "card", "tape", "late", "mate", "rate", "rods", "pods", "plum", "scum", "guns", "shun", "nuns", "plus", "take", "rake", "caps", "soft", "hard", "ease", "easy", "eggs", "sock", "leek", "reek", "lake", "seas", "sigh", "sign", "fare", "lair", "wear", "sure", "wink", "wonk", "talk", "seer", "beer", "wine", "dove", "crow", "soda", "peak", "weak", "seek"];
+
+    var words3 = ["shit", "fuck", "love", "cats", "dogs", "kiss", "mark", "foot", "hand", "damn", "cock", "home", "bath", "food", "milk", "meat", "meet", "hear", "here", "eyes", "nose", "neck", "head", "cold", "monk", "feet", "dear", "deer", "mice", "frog", "swan", "duck", "bird", "bits", "fold", "chip", "fish", "look", "lean", "ring", "rung", "rang", "lamb", "goat", "wart", "wood", "fire", "camp", "shoe", "boot", "lamp", "make", "made", "have", "ride", "meek", "blue", "pink", "read", "book", "back", "legs", "arms", "lung", "roof", "star", "wind", "rain", "snow", "fart", "hook", "isis", "iris", "hole", "mole", "clip", "bags", "pant", "rush", "bunk", "funk", "rank", "dank", "dark", "arts", "line", "dots", "plot", "rock","sham", "shiv", "stab", "scab", "hurt", "pain", "ages", "they", "them", "twat", "cunt", "leak", "spit", "rite", "duck", "bend", "snap", "bats", "fats", "curb", "carb", "like", "sect", "cult", "tent", "rent", "lent", "dent", "pent", "went", "goes", "moon", "moan", "mean", "shed", "sink", "sync", "jail", "rail", "nail", "mail", "pail", "sail", "zeal", "meal", "peel", "reel", "pear", "pair", "bail", "bond", "fail", "tail", "rear", "near", "sear", "suck", "lips", "tack", "rack", "gags", "hack", "jack", "lack", "pack", "sack", "wick", "yank", "fang", "sang", "lane", "deep", "peep", "seep", "dump", "sump", "lump", "pump", "rump", "ramp", "damp", "cart", "cars", "chai", "heap", "leap", "reap", "cape", "rape", "date", "time", "send", "sent", "rend", "mend", "fend", "well", "that", "leaf", "tree", "road", "node", "mode", "pond", "fond", "cask", "asks", "mask", "crag", "tire", "liar", "lyre", "free", "cost", "bill", "sill", "will", "mill", "pill", "word", "keys", "cars", "mare", "scar", "move", "yore", "lore", "bore", "boar", "sore", "soar", "hope", "fear", "ears", "tear", "tear", "read", "mead", "lead", "lead", "tore", "wore", "gore", "more", "fore", "door", "jamb", "walk", "weep", "four", "five", "nine", "tens", "quid", "bees", "knee", "bows", "rows", "does", "does", "fawn", "lawn", "yawn", "pawn", "dawn", "loan", "pack", "page", "lock", "down", "left", "seat", "beat", "weed", "acid", "coke", "come", "dome", "loam", "peat", "dirt", "rock", "bugs", "worm", "room", "soon", "fork", "bowl", "dust", "mist", "must", "rust", "hand", "land", "cans", "lust", "zest", "pest", "nest", "best", "rest", "verb", "noun", "ends", "feed", "need", "pole", "mete", "ball", "mall", "yard", "lard", "cows", "hens", "pens", "cups", "hats", "card", "tape", "late", "mate", "rate", "rods", "pods", "plum", "scum", "guns", "shun", "nuns", "plus", "take", "rake", "caps", "soft", "hard", "ease", "easy", "eggs", "sock", "leek", "reek", "lake", "seas", "sigh", "sign", "fare", "lair", "wear", "sure", "wink", "wonk", "talk", "seer", "beer", "wine", "dove", "crow", "soda", "peak", "weak", "seek"];
+
+    var words4 = ["shit", "fuck", "love", "cats", "dogs", "kiss", "mark", "foot", "hand", "damn", "cock", "home", "bath", "food", "milk", "meat", "meet", "hear", "here", "eyes", "nose", "neck", "head", "cold", "monk", "feet", "dear", "deer", "mice", "frog", "swan", "duck", "bird", "bits", "fold", "chip", "fish", "look", "lean", "ring", "rung", "rang", "lamb", "goat", "wart", "wood", "fire", "camp", "shoe", "boot", "lamp", "make", "made", "have", "ride", "meek", "blue", "pink", "read", "book", "back", "legs", "arms", "lung", "roof", "star", "wind", "rain", "snow", "fart", "hook", "isis", "iris", "hole", "mole", "clip", "bags", "pant", "rush", "bunk", "funk", "rank", "dank", "dark", "arts", "line", "dots", "plot", "rock","sham", "shiv", "stab", "scab", "hurt", "pain", "ages", "they", "them", "twat", "cunt", "leak", "spit", "rite", "duck", "bend", "snap", "bats", "fats", "curb", "carb", "like", "sect", "cult", "tent", "rent", "lent", "dent", "pent", "went", "goes", "moon", "moan", "mean", "shed", "sink", "sync", "jail", "rail", "nail", "mail", "pail", "sail", "zeal", "meal", "peel", "reel", "pear", "pair", "bail", "bond", "fail", "tail", "rear", "near", "sear", "suck", "lips", "tack", "rack", "gags", "hack", "jack", "lack", "pack", "sack", "wick", "yank", "fang", "sang", "lane", "deep", "peep", "seep", "dump", "sump", "lump", "pump", "rump", "ramp", "damp", "cart", "cars", "chai", "heap", "leap", "reap", "cape", "rape", "date", "time", "send", "sent", "rend", "mend", "fend", "well", "that", "leaf", "tree", "road", "node", "mode", "pond", "fond", "cask", "asks", "mask", "crag", "tire", "liar", "lyre", "free", "cost", "bill", "sill", "will", "mill", "pill", "word", "keys", "cars", "mare", "scar", "move", "yore", "lore", "bore", "boar", "sore", "soar", "hope", "fear", "ears", "tear", "tear", "read", "mead", "lead", "lead", "tore", "wore", "gore", "more", "fore", "door", "jamb", "walk", "weep", "four", "five", "nine", "tens", "quid", "bees", "knee", "bows", "rows", "does", "does", "fawn", "lawn", "yawn", "pawn", "dawn", "loan", "pack", "page", "lock", "down", "left", "seat", "beat", "weed", "acid", "coke", "come", "dome", "loam", "peat", "dirt", "rock", "bugs", "worm", "room", "soon", "fork", "bowl", "dust", "mist", "must", "rust", "hand", "land", "cans", "lust", "zest", "pest", "nest", "best", "rest", "verb", "noun", "ends", "feed", "need", "pole", "mete", "ball", "mall", "yard", "lard", "cows", "hens", "pens", "cups", "hats", "card", "tape", "late", "mate", "rate", "rods", "pods", "plum", "scum", "guns", "shun", "nuns", "plus", "take", "rake", "caps", "soft", "hard", "ease", "easy", "eggs", "sock", "leek", "reek", "lake", "seas", "sigh", "sign", "fare", "lair", "wear", "sure", "wink", "wonk", "talk", "seer", "beer", "wine", "dove", "crow", "soda", "peak", "weak", "seek"];
+
+    var words5 = ["shit", "fuck", "love", "cats", "dogs", "kiss", "mark", "foot", "hand", "damn", "cock", "home", "bath", "food", "milk", "meat", "meet", "hear", "here", "eyes", "nose", "neck", "head", "cold", "monk", "feet", "dear", "deer", "mice", "frog", "swan", "duck", "bird", "bits", "fold", "chip", "fish", "look", "lean", "ring", "rung", "rang", "lamb", "goat", "wart", "wood", "fire", "camp", "shoe", "boot", "lamp", "make", "made", "have", "ride", "meek", "blue", "pink", "read", "book", "back", "legs", "arms", "lung", "roof", "star", "wind", "rain", "snow", "fart", "hook", "isis", "iris", "hole", "mole", "clip", "bags", "pant", "rush", "bunk", "funk", "rank", "dank", "dark", "arts", "line", "dots", "plot", "rock","sham", "shiv", "stab", "scab", "hurt", "pain", "ages", "they", "them", "twat", "cunt", "leak", "spit", "rite", "duck", "bend", "snap", "bats", "fats", "curb", "carb", "like", "sect", "cult", "tent", "rent", "lent", "dent", "pent", "went", "goes", "moon", "moan", "mean", "shed", "sink", "sync", "jail", "rail", "nail", "mail", "pail", "sail", "zeal", "meal", "peel", "reel", "pear", "pair", "bail", "bond", "fail", "tail", "rear", "near", "sear", "suck", "lips", "tack", "rack", "gags", "hack", "jack", "lack", "pack", "sack", "wick", "yank", "fang", "sang", "lane", "deep", "peep", "seep", "dump", "sump", "lump", "pump", "rump", "ramp", "damp", "cart", "cars", "chai", "heap", "leap", "reap", "cape", "rape", "date", "time", "send", "sent", "rend", "mend", "fend", "well", "that", "leaf", "tree", "road", "node", "mode", "pond", "fond", "cask", "asks", "mask", "crag", "tire", "liar", "lyre", "free", "cost", "bill", "sill", "will", "mill", "pill", "word", "keys", "cars", "mare", "scar", "move", "yore", "lore", "bore", "boar", "sore", "soar", "hope", "fear", "ears", "tear", "tear", "read", "mead", "lead", "lead", "tore", "wore", "gore", "more", "fore", "door", "jamb", "walk", "weep", "four", "five", "nine", "tens", "quid", "bees", "knee", "bows", "rows", "does", "does", "fawn", "lawn", "yawn", "pawn", "dawn", "loan", "pack", "page", "lock", "down", "left", "seat", "beat", "weed", "acid", "coke", "come", "dome", "loam", "peat", "dirt", "rock", "bugs", "worm", "room", "soon", "fork", "bowl", "dust", "mist", "must", "rust", "hand", "land", "cans", "lust", "zest", "pest", "nest", "best", "rest", "verb", "noun", "ends", "feed", "need", "pole", "mete", "ball", "mall", "yard", "lard", "cows", "hens", "pens", "cups", "hats", "card", "tape", "late", "mate", "rate", "rods", "pods", "plum", "scum", "guns", "shun", "nuns", "plus", "take", "rake", "caps", "soft", "hard", "ease", "easy", "eggs", "sock", "leek", "reek", "lake", "seas", "sigh", "sign", "fare", "lair", "wear", "sure", "wink", "wonk", "talk", "seer", "beer", "wine", "dove", "crow", "soda", "peak", "weak", "seek"];
+
+    var words6 = ["shit", "fuck", "love", "cats", "dogs", "kiss", "mark", "foot", "hand", "damn", "cock", "home", "bath", "food", "milk", "meat", "meet", "hear", "here", "eyes", "nose", "neck", "head", "cold", "monk", "feet", "dear", "deer", "mice", "frog", "swan", "duck", "bird", "bits", "fold", "chip", "fish", "look", "lean", "ring", "rung", "rang", "lamb", "goat", "wart", "wood", "fire", "camp", "shoe", "boot", "lamp", "make", "made", "have", "ride", "meek", "blue", "pink", "read", "book", "back", "legs", "arms", "lung", "roof", "star", "wind", "rain", "snow", "fart", "hook", "isis", "iris", "hole", "mole", "clip", "bags", "pant", "rush", "bunk", "funk", "rank", "dank", "dark", "arts", "line", "dots", "plot", "rock","sham", "shiv", "stab", "scab", "hurt", "pain", "ages", "they", "them", "twat", "cunt", "leak", "spit", "rite", "duck", "bend", "snap", "bats", "fats", "curb", "carb", "like", "sect", "cult", "tent", "rent", "lent", "dent", "pent", "went", "goes", "moon", "moan", "mean", "shed", "sink", "sync", "jail", "rail", "nail", "mail", "pail", "sail", "zeal", "meal", "peel", "reel", "pear", "pair", "bail", "bond", "fail", "tail", "rear", "near", "sear", "suck", "lips", "tack", "rack", "gags", "hack", "jack", "lack", "pack", "sack", "wick", "yank", "fang", "sang", "lane", "deep", "peep", "seep", "dump", "sump", "lump", "pump", "rump", "ramp", "damp", "cart", "cars", "chai", "heap", "leap", "reap", "cape", "rape", "date", "time", "send", "sent", "rend", "mend", "fend", "well", "that", "leaf", "tree", "road", "node", "mode", "pond", "fond", "cask", "asks", "mask", "crag", "tire", "liar", "lyre", "free", "cost", "bill", "sill", "will", "mill", "pill", "word", "keys", "cars", "mare", "scar", "move", "yore", "lore", "bore", "boar", "sore", "soar", "hope", "fear", "ears", "tear", "tear", "read", "mead", "lead", "lead", "tore", "wore", "gore", "more", "fore", "door", "jamb", "walk", "weep", "four", "five", "nine", "tens", "quid", "bees", "knee", "bows", "rows", "does", "does", "fawn", "lawn", "yawn", "pawn", "dawn", "loan", "pack", "page", "lock", "down", "left", "seat", "beat", "weed", "acid", "coke", "come", "dome", "loam", "peat", "dirt", "rock", "bugs", "worm", "room", "soon", "fork", "bowl", "dust", "mist", "must", "rust", "hand", "land", "cans", "lust", "zest", "pest", "nest", "best", "rest", "verb", "noun", "ends", "feed", "need", "pole", "mete", "ball", "mall", "yard", "lard", "cows", "hens", "pens", "cups", "hats", "card", "tape", "late", "mate", "rate", "rods", "pods", "plum", "scum", "guns", "shun", "nuns", "plus", "take", "rake", "caps", "soft", "hard", "ease", "easy", "eggs", "sock", "leek", "reek", "lake", "seas", "sigh", "sign", "fare", "lair", "wear", "sure", "wink", "wonk", "talk", "seer", "beer", "wine", "dove", "crow", "soda", "peak", "weak", "seek"];
+
+    var words7 = ["shit", "fuck", "love", "cats", "dogs", "kiss", "mark", "foot", "hand", "damn", "cock", "home", "bath", "food", "milk", "meat", "meet", "hear", "here", "eyes", "nose", "neck", "head", "cold", "monk", "feet", "dear", "deer", "mice", "frog", "swan", "duck", "bird", "bits", "fold", "chip", "fish", "look", "lean", "ring", "rung", "rang", "lamb", "goat", "wart", "wood", "fire", "camp", "shoe", "boot", "lamp", "make", "made", "have", "ride", "meek", "blue", "pink", "read", "book", "back", "legs", "arms", "lung", "roof", "star", "wind", "rain", "snow", "fart", "hook", "isis", "iris", "hole", "mole", "clip", "bags", "pant", "rush", "bunk", "funk", "rank", "dank", "dark", "arts", "line", "dots", "plot", "rock","sham", "shiv", "stab", "scab", "hurt", "pain", "ages", "they", "them", "twat", "cunt", "leak", "spit", "rite", "duck", "bend", "snap", "bats", "fats", "curb", "carb", "like", "sect", "cult", "tent", "rent", "lent", "dent", "pent", "went", "goes", "moon", "moan", "mean", "shed", "sink", "sync", "jail", "rail", "nail", "mail", "pail", "sail", "zeal", "meal", "peel", "reel", "pear", "pair", "bail", "bond", "fail", "tail", "rear", "near", "sear", "suck", "lips", "tack", "rack", "gags", "hack", "jack", "lack", "pack", "sack", "wick", "yank", "fang", "sang", "lane", "deep", "peep", "seep", "dump", "sump", "lump", "pump", "rump", "ramp", "damp", "cart", "cars", "chai", "heap", "leap", "reap", "cape", "rape", "date", "time", "send", "sent", "rend", "mend", "fend", "well", "that", "leaf", "tree", "road", "node", "mode", "pond", "fond", "cask", "asks", "mask", "crag", "tire", "liar", "lyre", "free", "cost", "bill", "sill", "will", "mill", "pill", "word", "keys", "cars", "mare", "scar", "move", "yore", "lore", "bore", "boar", "sore", "soar", "hope", "fear", "ears", "tear", "tear", "read", "mead", "lead", "lead", "tore", "wore", "gore", "more", "fore", "door", "jamb", "walk", "weep", "four", "five", "nine", "tens", "quid", "bees", "knee", "bows", "rows", "does", "does", "fawn", "lawn", "yawn", "pawn", "dawn", "loan", "pack", "page", "lock", "down", "left", "seat", "beat", "weed", "acid", "coke", "come", "dome", "loam", "peat", "dirt", "rock", "bugs", "worm", "room", "soon", "fork", "bowl", "dust", "mist", "must", "rust", "hand", "land", "cans", "lust", "zest", "pest", "nest", "best", "rest", "verb", "noun", "ends", "feed", "need", "pole", "mete", "ball", "mall", "yard", "lard", "cows", "hens", "pens", "cups", "hats", "card", "tape", "late", "mate", "rate", "rods", "pods", "plum", "scum", "guns", "shun", "nuns", "plus", "take", "rake", "caps", "soft", "hard", "ease", "easy", "eggs", "sock", "leek", "reek", "lake", "seas", "sigh", "sign", "fare", "lair", "wear", "sure", "wink", "wonk", "talk", "seer", "beer", "wine", "dove", "crow", "soda", "peak", "weak", "seek"];
+
+    var words8 = ["shit", "fuck", "love", "cats", "dogs", "kiss", "mark", "foot", "hand", "damn", "cock", "home", "bath", "food", "milk", "meat", "meet", "hear", "here", "eyes", "nose", "neck", "head", "cold", "monk", "feet", "dear", "deer", "mice", "frog", "swan", "duck", "bird", "bits", "fold", "chip", "fish", "look", "lean", "ring", "rung", "rang", "lamb", "goat", "wart", "wood", "fire", "camp", "shoe", "boot", "lamp", "make", "made", "have", "ride", "meek", "blue", "pink", "read", "book", "back", "legs", "arms", "lung", "roof", "star", "wind", "rain", "snow", "fart", "hook", "isis", "iris", "hole", "mole", "clip", "bags", "pant", "rush", "bunk", "funk", "rank", "dank", "dark", "arts", "line", "dots", "plot", "rock","sham", "shiv", "stab", "scab", "hurt", "pain", "ages", "they", "them", "twat", "cunt", "leak", "spit", "rite", "duck", "bend", "snap", "bats", "fats", "curb", "carb", "like", "sect", "cult", "tent", "rent", "lent", "dent", "pent", "went", "goes", "moon", "moan", "mean", "shed", "sink", "sync", "jail", "rail", "nail", "mail", "pail", "sail", "zeal", "meal", "peel", "reel", "pear", "pair", "bail", "bond", "fail", "tail", "rear", "near", "sear", "suck", "lips", "tack", "rack", "gags", "hack", "jack", "lack", "pack", "sack", "wick", "yank", "fang", "sang", "lane", "deep", "peep", "seep", "dump", "sump", "lump", "pump", "rump", "ramp", "damp", "cart", "cars", "chai", "heap", "leap", "reap", "cape", "rape", "date", "time", "send", "sent", "rend", "mend", "fend", "well", "that", "leaf", "tree", "road", "node", "mode", "pond", "fond", "cask", "asks", "mask", "crag", "tire", "liar", "lyre", "free", "cost", "bill", "sill", "will", "mill", "pill", "word", "keys", "cars", "mare", "scar", "move", "yore", "lore", "bore", "boar", "sore", "soar", "hope", "fear", "ears", "tear", "tear", "read", "mead", "lead", "lead", "tore", "wore", "gore", "more", "fore", "door", "jamb", "walk", "weep", "four", "five", "nine", "tens", "quid", "bees", "knee", "bows", "rows", "does", "does", "fawn", "lawn", "yawn", "pawn", "dawn", "loan", "pack", "page", "lock", "down", "left", "seat", "beat", "weed", "acid", "coke", "come", "dome", "loam", "peat", "dirt", "rock", "bugs", "worm", "room", "soon", "fork", "bowl", "dust", "mist", "must", "rust", "hand", "land", "cans", "lust", "zest", "pest", "nest", "best", "rest", "verb", "noun", "ends", "feed", "need", "pole", "mete", "ball", "mall", "yard", "lard", "cows", "hens", "pens", "cups", "hats", "card", "tape", "late", "mate", "rate", "rods", "pods", "plum", "scum", "guns", "shun", "nuns", "plus", "take", "rake", "caps", "soft", "hard", "ease", "easy", "eggs", "sock", "leek", "reek", "lake", "seas", "sigh", "sign", "fare", "lair", "wear", "sure", "wink", "wonk", "talk", "seer", "beer", "wine", "dove", "crow", "soda", "peak", "weak", "seek"];
+
+    var words9 = ["shit", "fuck", "love", "cats", "dogs", "kiss", "mark", "foot", "hand", "damn", "cock", "home", "bath", "food", "milk", "meat", "meet", "hear", "here", "eyes", "nose", "neck", "head", "cold", "monk", "feet", "dear", "deer", "mice", "frog", "swan", "duck", "bird", "bits", "fold", "chip", "fish", "look", "lean", "ring", "rung", "rang", "lamb", "goat", "wart", "wood", "fire", "camp", "shoe", "boot", "lamp", "make", "made", "have", "ride", "meek", "blue", "pink", "read", "book", "back", "legs", "arms", "lung", "roof", "star", "wind", "rain", "snow", "fart", "hook", "isis", "iris", "hole", "mole", "clip", "bags", "pant", "rush", "bunk", "funk", "rank", "dank", "dark", "arts", "line", "dots", "plot", "rock","sham", "shiv", "stab", "scab", "hurt", "pain", "ages", "they", "them", "twat", "cunt", "leak", "spit", "rite", "duck", "bend", "snap", "bats", "fats", "curb", "carb", "like", "sect", "cult", "tent", "rent", "lent", "dent", "pent", "went", "goes", "moon", "moan", "mean", "shed", "sink", "sync", "jail", "rail", "nail", "mail", "pail", "sail", "zeal", "meal", "peel", "reel", "pear", "pair", "bail", "bond", "fail", "tail", "rear", "near", "sear", "suck", "lips", "tack", "rack", "gags", "hack", "jack", "lack", "pack", "sack", "wick", "yank", "fang", "sang", "lane", "deep", "peep", "seep", "dump", "sump", "lump", "pump", "rump", "ramp", "damp", "cart", "cars", "chai", "heap", "leap", "reap", "cape", "rape", "date", "time", "send", "sent", "rend", "mend", "fend", "well", "that", "leaf", "tree", "road", "node", "mode", "pond", "fond", "cask", "asks", "mask", "crag", "tire", "liar", "lyre", "free", "cost", "bill", "sill", "will", "mill", "pill", "word", "keys", "cars", "mare", "scar", "move", "yore", "lore", "bore", "boar", "sore", "soar", "hope", "fear", "ears", "tear", "tear", "read", "mead", "lead", "lead", "tore", "wore", "gore", "more", "fore", "door", "jamb", "walk", "weep", "four", "five", "nine", "tens", "quid", "bees", "knee", "bows", "rows", "does", "does", "fawn", "lawn", "yawn", "pawn", "dawn", "loan", "pack", "page", "lock", "down", "left", "seat", "beat", "weed", "acid", "coke", "come", "dome", "loam", "peat", "dirt", "rock", "bugs", "worm", "room", "soon", "fork", "bowl", "dust", "mist", "must", "rust", "hand", "land", "cans", "lust", "zest", "pest", "nest", "best", "rest", "verb", "noun", "ends", "feed", "need", "pole", "mete", "ball", "mall", "yard", "lard", "cows", "hens", "pens", "cups", "hats", "card", "tape", "late", "mate", "rate", "rods", "pods", "plum", "scum", "guns", "shun", "nuns", "plus", "take", "rake", "caps", "soft", "hard", "ease", "easy", "eggs", "sock", "leek", "reek", "lake", "seas", "sigh", "sign", "fare", "lair", "wear", "sure", "wink", "wonk", "talk", "seer", "beer", "wine", "dove", "crow", "soda", "peak", "weak", "seek"];
+
+    
+
+    //todo 
+    var columns = 10;
+    var rows = 10;
+    var wall = $("#wall");
+    var width = (100 / columns);   
+
+    $("head").append("<style>.col { width: " + width + "% }</style>");
+
+    for (var l = 0; l < rows; l++){
+        wall.append("<div class='row' id=id='row'" + l +"></div>")
+      for (var i = 0; i < columns; i++){
+        
+        switch(l){
+          case 0:
+            var word_sel = Math.floor((Math.random() * words0.length ));
+            var word = words0[word_sel];
+            wall.append("<div class='brick' id='brick" + l + i +"'>" + word +"</div>");
+            delete words0[word_sel];
+            break;
+          case 1:
+            var word_sel = Math.floor((Math.random() * words1.length ));
+            var word = words1[word_sel];
+            wall.append("<div class='brick' id='brick" + l + i +"'>" + word +"</div>");
+            delete words0[word_sel];
+            break;
+          case 2:
+            var word_sel = Math.floor((Math.random() * words2.length ));
+            var word = words2[word_sel];
+            wall.append("<div class='brick' id='brick" + l + i +"'>" + word +"</div>");
+            delete words0[word_sel];
+            break;
+          case 3:
+            var word_sel = Math.floor((Math.random() * words3.length ));
+            var word = words3[word_sel];
+            wall.append("<div class='brick' id='brick" + l + i +"'>" + word +"</div>");
+            delete words0[word_sel];
+            break;
+          case 4:
+            var word_sel = Math.floor((Math.random() * words4.length ));
+            var word = words4[word_sel];
+            wall.append("<div class='brick' id='brick" + l + i +"'>" + word +"</div>");
+            delete words0[word_sel];
+            break;
+          case 5:
+            var word_sel = Math.floor((Math.random() * words5.length ));
+            var word = words5[word_sel];
+            wall.append("<div class='brick' id='brick" + l + i +"'>" + word +"</div>");
+            delete words0[word_sel];
+            break;
+          case 6:
+            var word_sel = Math.floor((Math.random() * words6.length ));
+            var word = words6[word_sel];
+            wall.append("<div class='brick' id='brick" + l + i +"'>" + word +"</div>");
+            delete words0[word_sel];
+            break;
+          case 7:
+            var word_sel = Math.floor((Math.random() * words7.length ));
+            var word = words7[word_sel];
+            wall.append("<div class='brick' id='brick" + l + i +"'>" + word +"</div>");
+            delete words0[word_sel];
+            break;
+          case 8:
+            var word_sel = Math.floor((Math.random() * words8.length ));
+            var word = words8[word_sel];
+            wall.append("<div class='brick' id='brick" + l + i +"'>" + word +"</div>");
+            delete words0[word_sel];
+            break;
+          case 9:
+            var word_sel = Math.floor((Math.random() * words9.length ));
+            var word = words9[word_sel];
+            wall.append("<div class='brick' id='brick" + l + i +"'>" + word +"</div>");
+            delete words0[word_sel];
+            break;
+          
+        }
+        
+        
+      }
+    }
+    function change_word() {
+      var row_sel = Math.floor(Math.random() * rows);
+      var sel = String(Math.floor(Math.random() * columns));
+      switch(row_sel){
+          case 0:
+            $("#brick"+ row_sel + sel).html(words0[Math.floor((Math.random() * words0.length))]);
+            delete words0[word_sel];
+            break;
+          case 1:
+            $("#brick"+ row_sel + sel).html(words1[Math.floor((Math.random() * words1.length))]);
+            delete words1[word_sel];
+            break;
+          case 2:
+            $("#brick"+ row_sel + sel).html(words2[Math.floor((Math.random() * words2.length))]);
+            delete words2[word_sel];
+            break;
+          case 3:
+            $("#brick"+ row_sel + sel).html(words3[Math.floor((Math.random() * words3.length))]);
+            delete words3[word_sel];
+            break;
+          case 4:
+            $("#brick"+ row_sel + sel).html(words4[Math.floor((Math.random() * words4.length))]);
+            delete words4[word_sel];
+            break;
+          case 5:
+            $("#brick"+ row_sel + sel).html(words5[Math.floor((Math.random() * words5.length))]);
+            delete words5[word_sel];
+            break;
+          case 6:
+            $("#brick"+ row_sel + sel).html(words6[Math.floor((Math.random() * words6.length))]);
+            delete words6[word_sel];
+            break;
+          case 7:
+            $("#brick"+ row_sel + sel).html(words7[Math.floor((Math.random() * words7.length))]);
+            delete words7[word_sel];
+            break;
+          case 8:
+            $("#brick"+ row_sel + sel).html(words8[Math.floor((Math.random() * words8.length))]);
+            delete words8[word_sel];
+            break;
+          case 9:
+            $("#brick"+ row_sel + sel).html(words9[Math.floor((Math.random() * words9.length))]);
+            delete words9[word_sel];
+            break;
+        }
+      
+      console.log("wall update brick" + sel);
+
+    }
+    
+
+    window.setInterval(change_word, 100);
+
+  </script>
+
+</body>
+
+</html>

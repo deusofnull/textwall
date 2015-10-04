@@ -1,0 +1,19 @@
+div#wall {
+  margin: 50 auto auto 50;
+}
+.row {
+  display: block;
+}
+.brick {
+  display: inline;
+  font-size: 44px;
+  border: 0px solid white;
+  padding: 1px 7px 1px 7px;
+  background: #FFFFFF;
+  font-family: monospace;
+  font-weight: bold;
+}
+.brick:hover {
+  background: #000000;
+  cursor: help;
+}
