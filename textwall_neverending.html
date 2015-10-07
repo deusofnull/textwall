@@ -123,85 +123,40 @@
       var sel = String(Math.floor(Math.random() * columns));
       switch(row_sel){
           case 0:
-            var a = Math.floor((Math.random() * words0.length));
-            if (a == 0){
-              $("#brick"+ row_sel + sel).html("    ");
-            }
-            $("#brick"+ row_sel + sel).html(words0[a]);
-            words0.splice(a, 1);
-            console.log("words9 array length: " + words0.length);
+            $("#brick"+ row_sel + sel).html(words0[Math.floor((Math.random() * words0.length))]);
+            delete words0[word_sel];
             break;
           case 1:
-            var a = Math.floor((Math.random() * words1.length));
-            if (a == 0){
-              $("#brick"+ row_sel + sel).html("    ");
-            }
-            $("#brick"+ row_sel + sel).html(words1[a]);
-            words1.splice(a, 1);
-            console.log("words9 array length: " + words1.length);
+            $("#brick"+ row_sel + sel).html(words1[Math.floor((Math.random() * words1.length))]);
+            delete words1[word_sel];
             break;
           case 2:
-            var a = Math.floor((Math.random() * words2.length));
-            if (a == 0){
-              $("#brick"+ row_sel + sel).html("    ");
-            }
-            $("#brick"+ row_sel + sel).html(words2[a]);
-            words2.splice(a, 1);
-            console.log("words9 array length: " + words2.length);
+            $("#brick"+ row_sel + sel).html(words2[Math.floor((Math.random() * words2.length))]);
+            delete words2[word_sel];
             break;
           case 3:
-            var a = Math.floor((Math.random() * words3.length));
-            if (a == 0){
-              $("#brick"+ row_sel + sel).html("    ");
-            }
-            $("#brick"+ row_sel + sel).html(words3[a]);
-            words3.splice(a, 1);
-            console.log("words9 array length: " + words3.length);
+            $("#brick"+ row_sel + sel).html(words3[Math.floor((Math.random() * words3.length))]);
+            delete words3[word_sel];
             break;
           case 4:
-            var a = Math.floor((Math.random() * words4.length));
-            if (a == 0){
-              $("#brick"+ row_sel + sel).html("    ");
-            }
-            $("#brick"+ row_sel + sel).html(words4[a]);
-            words4.splice(a, 1);
-            console.log("words9 array length: " + words4.length);
+            $("#brick"+ row_sel + sel).html(words4[Math.floor((Math.random() * words4.length))]);
+            delete words4[word_sel];
             break;
           case 5:
-            var a = Math.floor((Math.random() * words5.length));
-            if (a == 0){
-              $("#brick"+ row_sel + sel).html("    ");
-            }
-            $("#brick"+ row_sel + sel).html(words5[a]);
-            words5.splice(a, 1);
-            console.log("words9 array length: " + words5.length);
+            $("#brick"+ row_sel + sel).html(words5[Math.floor((Math.random() * words5.length))]);
+            delete words5[word_sel];
             break;
           case 6:
-            var a = Math.floor((Math.random() * words6.length));
-            if (a == 0){
-              $("#brick"+ row_sel + sel).html("    ");
-            }
-            $("#brick"+ row_sel + sel).html(words6[a]);
-            words6.splice(a, 1);
-            console.log("words9 array length: " + words6.length);
+            $("#brick"+ row_sel + sel).html(words6[Math.floor((Math.random() * words6.length))]);
+            delete words6[word_sel];
             break;
           case 7:
-            var a = Math.floor((Math.random() * words7.length));
-            if (a == 0){
-              $("#brick"+ row_sel + sel).html("    ");
-            }
-            $("#brick"+ row_sel + sel).html(words7[a]);
-            words7.splice(a, 1);
-            console.log("words9 array length: " + words7.length);
+            $("#brick"+ row_sel + sel).html(words7[Math.floor((Math.random() * words7.length))]);
+            delete words7[word_sel];
             break;
           case 8:
-            var a = Math.floor((Math.random() * words8.length));
-            if (a == 0){
-              $("#brick"+ row_sel + sel).html("    ");
-            }
-            $("#brick"+ row_sel + sel).html(words8[a]);
-            words8.splice(a, 1);
-            console.log("words9 array length: " + words8.length);
+            $("#brick"+ row_sel + sel).html(words8[Math.floor((Math.random() * words8.length))]);
+            delete words8[word_sel];
             break;
           case 9:
             var a = Math.floor((Math.random() * words9.length));
@@ -219,15 +174,7 @@
     }
     
 
-    window.setInterval(change_word, 8);
-
-    /*
-      TODO ideas
-        - after all bricks are empty, mouse hover on row replenishes the words of each row
-        - cursor is invisible
-        
-
-    */
+    window.setInterval(change_word, 1);
 
   </script>
 

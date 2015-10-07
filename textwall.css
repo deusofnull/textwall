@@ -1,16 +1,15 @@
 div#wall {
-  margin: 50 auto auto 50;
 }
 .row {
   display: block;
 }
 .brick {
   display: inline;
-  font-size: 44px;
+  font-size: 49;
   border: 0px solid white;
   padding: 1px 7px 1px 7px;
   background: #FFFFFF;
-  font-family: monospace;
+  font-family: "Courier New";
   font-weight: bold;
 }
 .brick:hover {
